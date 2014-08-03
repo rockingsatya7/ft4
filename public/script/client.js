@@ -4,7 +4,7 @@ $(document).ready(function(){
    var data=$("#text").val();
    $.ajax({
                     type : 'post',
-                    url :  "http://nodesearch-rockingsearch.rhcloud.com/:8080/post",
+                    url :  "http://nodesearch-rockingsearch.rhcloud.com/post",
                     dataType : "json",
                     data : {str:data},                   
 				   crossDomain : true, 
