@@ -94,10 +94,11 @@ app.post('/post',function(req,res){
    console.log(response);
     res.send(response);
 });
+
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080  
 , ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 
-var server = app.listen(3000,
+var server = app.listen(port,
     function() {
         console.log('Listening on port %d',server.address().port);
     }
