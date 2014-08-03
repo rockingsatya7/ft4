@@ -21,20 +21,7 @@ var enableCORS = function(req, res, next) {
 //app.use(express.static(path.join(__dirname, 'public')));
 app.use("/text",  express.static(__dirname + '/public/text'));
 app.use("/script", express.static(__dirname + '/public/script'));
-
-app.get('/',function(req,res){
-console.log('hi');
-
-fs.readFile('./1.html', function (err, html) {
-    if (err) {
-        throw err; 
-    }         
-        res.writeHead(200, { 'Content-Type': "text/html" });
-        res.write(html);
-		res.end();
-    });});
-
-	function eliminateDuplicates(arr) {
+function eliminateDuplicates(arr) {
     var i,
         len = arr.length,
         out = [],
@@ -48,7 +35,20 @@ fs.readFile('./1.html', function (err, html) {
     }
     return out;
 }
-app.use(body_parser());
+
+app.get('/',function(req,res){
+console.log('hi');
+
+fs.readFile('./1.html', function (err, html) {
+    if (err) {
+        throw err; 
+    }         
+        res.writeHead(200, { 'Content-Type': "text/html" });
+        res.write(html);
+		res.end();
+    });});
+
+	app.use(body_parser());
 app.use(enableCORS);
 stemmer=natural.PorterStemmer;
 stemmer.attach();
@@ -98,7 +98,7 @@ app.post('/post',function(req,res){
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080  
 , ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 
-var server = app.listen(port,
+var server = app.listen(port,ip,
     function() {
         console.log('Listening on port %d',server.address().port);
     }
